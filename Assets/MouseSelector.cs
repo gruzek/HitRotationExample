@@ -31,6 +31,11 @@ public class MouseSelector : MonoBehaviour
             {
                 selectorObject.transform.position = hit.point;
                 selectorObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                // rotate to fit the object rotation
+                Vector3 objectRotation = hit.collider.gameObject.transform.rotation.eulerAngles;
+                Vector3 selectorRotation = selectorObject.transform.rotation.eulerAngles;
+                selectorRotation.y = objectRotation.y;
+                selectorObject.transform.rotation = Quaternion.Euler(selectorRotation);
             }
         } 
     }
